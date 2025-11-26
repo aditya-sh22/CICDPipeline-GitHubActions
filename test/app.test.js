@@ -1,1 +1,5 @@
-console.log("Tested Successfully")
+console.log("Tested Successfully");
+
+test("Sample test", () => {
+  expect(1 + 1).toBe(2);
+});

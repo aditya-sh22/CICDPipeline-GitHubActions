@@ -1,5 +1,5 @@
 name: Parallel Jobs
-on: [push]
+on: [ push, pull_request]
 jobs:
   job1:
     runs-on: ubuntu-latest

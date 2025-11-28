@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Job 2 - Print Message
-        run: echo "This is Job 2"
+        run: eco "This is Job 2"
   job3:
     #needs: job2    
     runs-on: ubuntu-latest

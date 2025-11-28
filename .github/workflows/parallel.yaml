@@ -13,7 +13,8 @@ jobs:
       - name: Job 2 - Print Message
         run: eco "This is Job 2"
   job3:
-    #needs: job2    
+    needs: job2
+    if: success()
     runs-on: ubuntu-latest
     steps:
       - name: Job 3 - Print Message

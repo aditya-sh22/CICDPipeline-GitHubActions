@@ -1,3 +1,5 @@
+# This file has code to build and push a Docker image to Azure Container Registry (ACR) and GCR when a pull request is made.
+
 name: Image Push to ACR
 on: [pull_request]
 jobs:

@@ -1,3 +1,4 @@
+# This file deploys an S3 bucket using Terraform when code is pushed to the main branch.
 name: Deploy S3 Bucket via Terraform
 
 permissions:
@@ -5,7 +6,7 @@ permissions:
   contents: read
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -24,7 +25,7 @@ jobs:
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
-        
+
       - name: Terraform Init
         run: terraform init
 

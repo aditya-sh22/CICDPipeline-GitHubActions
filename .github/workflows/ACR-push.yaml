@@ -1,7 +1,7 @@
 # This file has code to build and push a Docker image to Azure Container Registry (ACR) and GCR when a pull request is made.
 
 name: Image Push to ACR
-on: [pull_request, push]
+on: [pull_request]
 jobs:
     build-and-push:
         runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
             docker tag ${{ secrets.ACR_REPO }}/myimage:${{ github.sha }} ${{ secrets.ACR_REPO }}/myimage:latest
             docker push ${{ secrets.ACR_REPO }}/myimage:${{ github.sha }}
             docker push ${{ secrets.ACR_REPO }}/myimage:latest
-# fix
+
     AKS-deploy:
         needs: build-and-push
         runs-on: ubuntu-latest
@@ -61,6 +61,6 @@ jobs:
             resource-group: Training-RG
             cluster-name: akscluster
 
-        - name: Test connection to AKS
+        - name: Deploy to AKS
           run: |
-            kubectl get nodes
+            kubectl apply -f kubernetes/deploy.yaml

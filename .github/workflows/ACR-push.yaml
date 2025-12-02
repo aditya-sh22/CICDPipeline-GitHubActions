@@ -58,7 +58,7 @@ jobs:
         - name: Get AKS credentials
           uses: azure/aks-set-context@v2
           with:
-            resource-group: Trainig-RG
+            resource-group: Training-RG
             cluster-name: akscluster
 
         - name: Test connection to AKS

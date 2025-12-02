@@ -4,6 +4,7 @@ name: Image Push to ACR
 on: [pull_request, push]
 jobs:
     build-and-push:
+        needs: AKS-deploy
         runs-on: ubuntu-latest
         steps:
         - name: Checkout code

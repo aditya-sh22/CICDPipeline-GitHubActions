@@ -1,7 +1,7 @@
 # This file has code to build and push a Docker image to Azure Container Registry (ACR) and GCR when a pull request is made.
 
 name: Image Push to ACR
-on: [pull_request]
+on: [pull_request, push]
 jobs:
     build-and-push:
         runs-on: ubuntu-latest
@@ -35,3 +35,32 @@ jobs:
             docker tag ${{ secrets.ACR_REPO }}/myimage:${{ github.sha }} ${{ secrets.ACR_REPO }}/myimage:latest
             docker push ${{ secrets.ACR_REPO }}/myimage:${{ github.sha }}
             docker push ${{ secrets.ACR_REPO }}/myimage:latest
+
+    AKS-deploy:
+        needs: build-and-push
+        runs-on: ubuntu-latest
+        permissions:
+          contents: read
+          id-token: write
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Login to Azure
+          uses: azure/login@v2
+          with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+            
+
+        - name: Get AKS credentials
+          uses: azure/aks-set-context@v2
+          with:
+            resource-group: Trainig-RG
+            cluster-name: akscluster
+
+        - name: Test connection to AKS
+          run: |
+            kubectl get nodes

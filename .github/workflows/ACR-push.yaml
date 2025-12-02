@@ -1,7 +1,7 @@
 # This file has code to build and push a Docker image to Azure Container Registry (ACR) and GCR when a pull request is made.
 
 name: Image Push to ACR
-on: [pull_request]
+on: [pull_request, push]
 jobs:
     build-and-push:
         runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
             docker push ${{ secrets.ACR_REPO }}/myimage:latest
 
     AKS-deploy:
-        needs: build-and-push
+        #needs: build-and-push
         runs-on: ubuntu-latest
         permissions:
           contents: read

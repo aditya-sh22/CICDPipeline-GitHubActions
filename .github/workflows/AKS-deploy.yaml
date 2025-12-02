@@ -1,5 +1,5 @@
 name: Deploy to AKS
-on: [pull_request, push]
+on: [pull_request]
 jobs:
     AKS-deploy:
         runs-on: ubuntu-latest

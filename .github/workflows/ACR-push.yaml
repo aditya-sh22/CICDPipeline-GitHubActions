@@ -35,7 +35,7 @@ jobs:
             docker tag ${{ secrets.ACR_REPO }}/myimage:${{ github.sha }} ${{ secrets.ACR_REPO }}/myimage:latest
             docker push ${{ secrets.ACR_REPO }}/myimage:${{ github.sha }}
             docker push ${{ secrets.ACR_REPO }}/myimage:latest
-
+# fix
     AKS-deploy:
         needs: build-and-push
         runs-on: ubuntu-latest
